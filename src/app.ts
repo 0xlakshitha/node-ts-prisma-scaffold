@@ -1,12 +1,11 @@
 import express, { Application } from 'express'
-import mongoose from 'mongoose'
 import compression from 'compression'
 import cors from 'cors'
 import morgan from 'morgan'
 import Controller from '@/utils/interfaces/controller.interface'
 import ErrorMiddleware from '@/middleware/error.middleware'
 import helmet from 'helmet'
-
+import logger from '@/utils/logger'
 
 class App {
     public express: Application
@@ -15,8 +14,6 @@ class App {
     constructor(controllers: Controller[], port: number) {
         this.express = express()
         this.port = port
-
-        this.initializeDatebaseConnction()
         this.initializeMiddleware()
         this.initializeControllers(controllers)
         this.initializeErrorHandling()
@@ -41,17 +38,9 @@ class App {
         this.express.use(ErrorMiddleware)
     }
 
-    private initializeDatebaseConnction(): void {
-        const { MONGO_PATH, MONGO_USER, MONGO_PASSWORD } = process.env
-
-        mongoose.connect(
-            `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_PATH}`
-        )
-    }
-
     public listen(): void {
         this.express.listen(this.port, () => {
-            console.log(`App Runing On Port ${this.port}`)
+            logger.info(`App Runing On Port ${this.port}`)
         })
     }
 

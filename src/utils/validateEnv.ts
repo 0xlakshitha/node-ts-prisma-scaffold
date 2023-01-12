@@ -5,9 +5,7 @@ function validateEnv(): void {
         NODE_ENV: str({
             choices: ['development', 'production']
         }),
-        MONGO_PASSWORD: str(),
-        MONGO_USER: str(),
-        MONGO_PATH: str(),
+        DATABASE_URL: str(),
         PORT: port({ default: 3000 })
     })
 }
