@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import User from "@/resources/user/user.interface";
 import InternalServerException from "@/utils/exceptions/internal-server.exception";
+import { Request } from "express";
 
 class UserService {
     private prisma = new PrismaClient()
@@ -27,40 +28,39 @@ class UserService {
     }
 
     /**
-     * Attempt to login user
+     * Update user
      */
-    // public async login(
-    //     email: string,
-    //     password: string
-    // ): Promise<string | Error | HttpException> {
-    //     try {
-    //         const user = await this.prisma.user.findUnique({
-    //             where: {
-    //                 email: email
-    //             }
-    //         })
+    public async updateUser(req: Request): Promise<User | Error> {
+        try {
+            const user = await this.prisma.user.update({
+                where: {
+                  id: req.params.id,
+                },
+                data: req.body,
+              });
+              const { hash, ...payload} = user
+              return payload    
+        } catch (error) {
+            throw new InternalServerException()
+        }
+    }
 
-    //         if(!user) throw new NotFoundException(`Unable to find user with ${email}`)
+    /**
+     * Delete user
+     */
+    public async deleteUser(id: string): Promise<string | Error> {
+        try {
+            await this.prisma.user.delete({
+                where: {
+                    id: id
+                }
+            })
+            return `Successfully delete user ${id}`
 
-    //         if(await this.passwordValidation(password, user.hash)) {
-    //             return token.createToken(user.id)
-    //         }
-    //         else {
-    //             throw new HttpException(
-    //                 StatusCodes.BAD_REQUEST,
-    //                 'Wrong credentials given'
-    //             )
-    //         }
-    //     } catch (error) {
-    //         throw error
-    //     }
-    // }
-    
-    // private passwordValidation = async function (
-    //     password: string, hash: string | null
-    // ): Promise<Error | boolean> {
-    //     return await bcrypt.compare(password, hash? hash : '')
-    // }
+        } catch (error) {
+            throw new InternalServerException()
+        }
+    }
 
 }
 

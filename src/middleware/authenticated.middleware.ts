@@ -49,10 +49,25 @@ export async function AuthenticatedMiddleware (
 
         return next();
     } catch (error) {
-        return next(new InternalServerException());
+        return next(new UnathorizedException("Unauthorised"));
     }
 
 }
+
+
+export async function AuthenticatedUserMiddleware (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<Response | void> {
+    if(req.user.role === 'admin' || req.params.id === req.user.id) {
+        return next()
+    }
+    else {
+        return next(new ForbiddenException("Not allowed"))
+    }
+}
+
 
 export async function AuthenticatedAdminMiddleware (
     req: Request,
@@ -69,5 +84,6 @@ export async function AuthenticatedAdminMiddleware (
 
 export default {
     AuthenticatedMiddleware,
+    AuthenticatedUserMiddleware,
     AuthenticatedAdminMiddleware
 }

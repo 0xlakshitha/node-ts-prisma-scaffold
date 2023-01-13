@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "b2a3484a-740c-4bd6-b7a5-76accc20de9d",
+		"name": "Neevbitton",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User And Admin",
+			"item": [
+				{
+					"name": "Admin Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@system.com\",\n    \"password\": \"superscret\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"siriuscode@gmail.com\",\n    \"password\": \"mypassword\",\n    \"firstName\": \"Sirius\",\n    \"lastName\": \"Codz\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"siriuscode@gmail.com\",\n    \"password\": \"mypassword\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User (User must be an Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzNzk5MDg0LWVmMmItNDM2Yy1iNmVjLTQ0NmQ5ZjQ4YzZmOSIsImlhdCI6MTY3MzU4NDM4MSwiZXhwIjoxNjczNjcwNzgxfQ.m-84gU31gZet2j76W31Ar3M0ymW0_ElRx9ciP1eL9gE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User (User must be login before update)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzNzk5MDg0LWVmMmItNDM2Yy1iNmVjLTQ0NmQ5ZjQ4YzZmOSIsImlhdCI6MTY3MzU4NDM4MSwiZXhwIjoxNjczNjcwNzgxfQ.m-84gU31gZet2j76W31Ar3M0ymW0_ElRx9ciP1eL9gE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Lakshitha\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/users/30db0d4a-fe35-4fee-ad60-7ae259e91c92",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"users",
+								"30db0d4a-fe35-4fee-ad60-7ae259e91c92"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User (User must be login or Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzNzk5MDg0LWVmMmItNDM2Yy1iNmVjLTQ0NmQ5ZjQ4YzZmOSIsImlhdCI6MTY3MzU4NDM4MSwiZXhwIjoxNjczNjcwNzgxfQ.m-84gU31gZet2j76W31Ar3M0ymW0_ElRx9ciP1eL9gE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/api/users/30db0d4a-fe35-4fee-ad60-7ae259e91c92",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"users",
+								"30db0d4a-fe35-4fee-ad60-7ae259e91c92"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
